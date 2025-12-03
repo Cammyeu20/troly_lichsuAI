@@ -54,22 +54,24 @@ cau_hoi = st.text_input("❓ Nhập câu hỏi lịch sử:")
 # ======================
 def goi_ai_lich_su(text):
     payload = {
-        "model": "deepseek-r1",
+        "model": "mistral",
         "messages": [
-            {"role": "system", "content": "Bạn là trợ lý lịch sử. Hãy trả lời chính xác, ngắn gọn, dễ hiểu."},
+            {"role": "system", "content": "Bạn là trợ lý lịch sử, trả lời chính xác và dễ hiểu."},
             {"role": "user", "content": text}
         ]
     }
 
     try:
         res = requests.post(
-            "https://api.deepseek.com/free/chat",
+            "https://api.litellm.ai/chat/completions",
             json=payload,
             timeout=20
         )
         data = res.json()
-        return data.get("response", "❌ Không nhận được trả lời từ AI.")
-    except:
+
+        return data["choices"][0]["message"]["content"]
+
+    except Exception as e:
         return "❌ Lỗi kết nối AI."
 
 # ======================
