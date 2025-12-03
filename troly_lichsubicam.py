@@ -71,9 +71,6 @@ def goi_ai_lich_su(text):
 
         return data["choices"][0]["message"]["content"]
 
-    except Exception as e:
-        return "❌ Lỗi kết nối AI."
-
 # ======================
 # 📖 NÚT TRẢ LỜI
 # ======================
